@@ -59,6 +59,25 @@ def filter_by_males(penguins):
             
     return list_of_males
 
+# INPUT: penguins (list of dicts)
+# OUTPUT: species_dict (dict of lists)
+# This function takes in a list of penguin dictionaries and returns a dictionary
+# where the keys are the unique species of penguins and the values are lists of
+# dictionaries representing the penguins of that species.
+def group_by_species(penguins):
+    
+    species_dict = {}
+    
+    for penguin in penguins:
+        species = penguin["species"]
+        if species not in species_dict:
+            species_dict[species] = []
+        
+        species_dict[species].append(penguin)
+        
+    return species_dict
+        
+
 def main():
 
     if __name__ == '__main__':
