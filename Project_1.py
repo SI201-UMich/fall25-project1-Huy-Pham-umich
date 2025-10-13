@@ -33,7 +33,7 @@ def read_penguins_csv(file_path):
         penguin_dict = {}
         # Loops through each column in the row, creating a key and value pair
         for i in range(len(header)):
-            penguin_dict[header[i]] = row[i]
+            penguin_dict[header[i].strip()] = row[i].strip()
         # Adds the dictionary to the list.
         list_of_dicts.append(penguin_dict)  
             
@@ -41,6 +41,23 @@ def read_penguins_csv(file_path):
     inFile.close()  
     
     return list_of_dicts
+
+
+# INPUT: penguins (list of dicts)
+# OUTPUT: male_penguins (list of dicts)
+# This function takes in a list of penguin dictionaries and returns a new list
+# containing only the dictionaries where the "Sex" key has the value "male".    
+def filter_by_males(penguins):
+    
+    # Initialize an empty list to store the male penguins.
+    list_of_males = []
+    
+    # Loops through each penguin in the list.
+    for penguin in penguins:
+        if penguin["sex"] == "male":
+            list_of_males.append(penguin)
+            
+    return list_of_males
 
 def main():
 
