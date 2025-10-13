@@ -79,6 +79,19 @@ def group_by_species(penguins):
         
 
 def main():
+    # Example usage (you can replace this with actual test logic or file path)
+    file_path = "penguins.csv"
+    penguins = read_penguins_csv(file_path)
+    males = filter_by_males(penguins)
+    grouped = group_by_species(penguins)
 
-    if __name__ == '__main__':
-        main()
+    # Print summary info
+    print(f"Total penguins: {len(penguins)}")
+    print(f"Male penguins: {len(males)}")
+    print("Species breakdown:")
+    for species, group in grouped.items():
+        print(f"  {species}: {len(group)}")
+
+# This should be outside the main() function
+if __name__ == '__main__':
+    main()
