@@ -76,7 +76,34 @@ def group_by_species(penguins):
         species_dict[species].append(penguin)
         
     return species_dict
+
+
+# INPUT: penguins (dicionary of lists of dictionaries), threshold (int)
+# OUTPUT: percent dictionary (dict)
+# This function calculates the percentage of penguins that have a body mass greater
+# than the given threshold. It returns a dictionary with the species as keys and
+# the percentage of heavy penguins as values.
+def calculate_heavy_penguins(penguins, threshold):
+    
+    percent_dict = {}
+    
+    for species, penguin_list in penguins.items():
         
+        total_count = len(penguin_list)
+        percent_dict[species] = 0
+        
+        if total_count == 0:
+            continue
+        
+        for penguin in penguin_list:
+            if penguin["body_mass_g"] == "NA":
+                continue
+            if int(penguin["body_mass_g"]) > threshold:
+                percent_dict[species] += 1 
+                
+        percent_dict[species] = (percent_dict[species] / total_count) * 100       
+        
+    return percent_dict
 
 def main():
     # Example usage (you can replace this with actual test logic or file path)
@@ -91,6 +118,12 @@ def main():
     print("Species breakdown:")
     for species, group in grouped.items():
         print(f"  {species}: {len(group)}")
+        
+    threshold = 4000
+    heavy_stats = calculate_heavy_penguins(grouped, threshold)
+    print(f"\nPercentage of penguins over {threshold}g:")
+    for species, percent in heavy_stats.items():
+        print(f"  {species}: {percent:.2f}%")
 
 # This should be outside the main() function
 if __name__ == '__main__':
