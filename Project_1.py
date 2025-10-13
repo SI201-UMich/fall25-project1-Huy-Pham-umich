@@ -66,7 +66,7 @@ def filter_by_males(penguins):
 # containing only the dictionaries where the "island" key has the value "Biscoe". 
 def filter_by_Biscoe(penguins):
         
-    # Initialize an empty list to store the male penguins.
+    # Initialize an empty list to store the Biscoe penguins.
     list_of_Biscoe = []
     
     # Loops through each penguin in the list.
@@ -122,6 +122,26 @@ def calculate_heavy_penguins(penguins, threshold):
         
     return percent_dict
 
+# INPUT: penguins (list of dicts)
+# OUTPUT: average_bill_length (float)
+# This function calculates the average bill length of the penguins in the list.
+def calculate_average_bill_length(penguins):
+    
+    total_bill_length = 0
+    count = 0
+    
+    for penguin in penguins:
+        if penguin["bill_length_mm"] == "NA":
+            continue
+        total_bill_length += float(penguin["bill_length_mm"])
+        count += 1
+        
+    if count == 0:
+        return 0.0
+    
+    average_bill_length = total_bill_length / count
+    return average_bill_length
+
 # INPUT: percent_dict (dict), filename (str)
 # OUTPUT: None
 # This function writes the species and their corresponding percentage of heavy
@@ -148,24 +168,25 @@ def main():
     file_path = "penguins.csv"
     penguins = read_penguins_csv(file_path)
     males = filter_by_males(penguins)
-    Biscoes = filter_by_Biscoe(penguins)
-    grouped = group_by_species(penguins)
+    grouped = group_by_species(males)
+    
+    Biscoes = filter_by_Biscoe(males)
 
     # Print summary info
     print(f"Total penguins: {len(penguins)}")
     print(f"Male penguins: {len(males)}")
-    print(f"Biscoe penguins: {len(Biscoes)}")
-    print("Species breakdown:")
+    print(f"Male Biscoe Penguins: {len(Biscoes)}")
+    print("Species + Male Penguins Breakdown:")
     for species, group in grouped.items():
         print(f"  {species}: {len(group)}")
         
     threshold = 4500
     heavy_stats = calculate_heavy_penguins(grouped, threshold)
-    print(f"\nPercentage of penguins over {threshold}g:")
+    print(f"\nPercentage of male penguins over {threshold}g:")
     for species, percent in heavy_stats.items():
         print(f"  {species}: {percent:.2f}%")
         
-    output_file = "heavy_penguins.csv"
+    output_file = "heavy_male_penguins.csv"
     Write_Percent_To_CSV(heavy_stats, output_file)
     print(f"\nHeavy penguin percentages written to '{output_file}'")
 
