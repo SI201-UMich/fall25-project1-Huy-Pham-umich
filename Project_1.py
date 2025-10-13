@@ -161,6 +161,16 @@ def Write_Percent_To_CSV(percent_dict, filename):
     
     # Close the file.
     outFile.close()
+    
+def write_average_bill_length_to_txt(average_bill_length, filename):
+    # Open the file for writing.
+    outFile = open(filename, 'w')
+    
+    # Write the average bill length to the file.
+    outFile.write(f"Average Bill Length: {average_bill_length:.2f} mm\n")
+    
+    # Close the file.
+    outFile.close()
 
 
 def main():
@@ -171,6 +181,7 @@ def main():
     grouped = group_by_species(males)
     
     Biscoes = filter_by_Biscoe(males)
+    avg_bill_lngth = calculate_average_bill_length(Biscoes)
 
     # Print summary info
     print(f"Total penguins: {len(penguins)}")
@@ -179,6 +190,7 @@ def main():
     print("Species + Male Penguins Breakdown:")
     for species, group in grouped.items():
         print(f"  {species}: {len(group)}")
+    print(f"Average Bill Length of Male Biscoe Penguins: {avg_bill_lngth:.2f} mm")
         
     threshold = 4500
     heavy_stats = calculate_heavy_penguins(grouped, threshold)
@@ -189,8 +201,10 @@ def main():
     output_file = "heavy_male_penguins.csv"
     Write_Percent_To_CSV(heavy_stats, output_file)
     print(f"\nHeavy penguin percentages written to '{output_file}'")
+    
+    output_file_txt = "average_bill_length.txt"
+    write_average_bill_length_to_txt(avg_bill_lngth, output_file_txt)
+    print(f"Average bill length written to '{output_file_txt}'")
 
-
-# This should be outside the main() function
 if __name__ == '__main__':
     main()
