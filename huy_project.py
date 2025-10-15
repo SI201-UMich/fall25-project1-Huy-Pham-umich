@@ -3,7 +3,8 @@
 # Your student id: 3483 3492
 # Your email: huypham@umich.edu
 # Who or what you worked with on this homework (including generative AI like ChatGPT):
-# Felicia Wang, John (Yohan) Park, used ChatGPT to debug some syntax errors and help write some test cases.
+# Felicia Wang, John (Yohan) Park
+# Used ChatGPT to debug some syntax errors and help write and understand test cases.
 
 import os
 import unittest
