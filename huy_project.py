@@ -173,7 +173,8 @@ def write_average_bill_length_to_txt(average_bill_length, filename):
     # Close the file.
     outFile.close()
     
-# Main functions to perform the required tasks
+# Main functions to perform the required tasks------------------------------
+
 def calculate_percentage_of_male_penguins_over_threshold(input_file, threshold, output_file):
     #calling all the helper functions
     penguins = read_penguins_csv(input_file)
@@ -191,6 +192,7 @@ def calculate_avg_bill_depth_of_male_on_biscoe(input_file, output_file):
     avg_bill_lngth = calculate_average_bill_length(Biscoes)
     write_average_bill_length_to_txt(avg_bill_lngth, output_file)
 
+# Main------------------------------------------------------------------------------------------
 def main():
     file_path = "penguins.csv"
     outfile_1 = "heavy_male_penguins.csv"
